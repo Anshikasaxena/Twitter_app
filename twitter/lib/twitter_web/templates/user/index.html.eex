@@ -1,0 +1,144 @@
+<script>window.channelRoomId = "<%= @username%>"</script>
+<script>window.subRoomId = "<%= @subs%>"</script>
+<style>
+
+  body {
+    /* background-color: #2e86ab; */
+    margin: 0 auto;
+    width: 80%;
+  }
+  h1{
+    color:#38686a;
+    float: left;
+    margin-top: 10rem;
+    text-align: center;
+    position:relative;
+  }
+  h3{
+    float: center;
+    /* margin-top: 10rem; */
+    text-align: center;
+    position:relative;
+    border-bottom: 2px solid #38686a;
+  }
+  .allthebuttons{
+    float: left;
+    position:relative;
+  }
+  .topad{
+    margin: 1rem;
+  }
+  .btn{
+    background-color:#2e86ab;
+    border:0.1rem solid #2e86ab;
+    border-radius:.4rem;
+    color:#fff;
+    cursor:pointer;
+    display:inline-block;
+    font-size:1.1rem;
+    font-weight:700;
+    height:3.8rem;
+    letter-spacing:.1rem;
+    line-height:3.8rem;
+    padding:0 3.0rem;
+    text-align:center;
+    text-decoration:none;
+    text-transform:uppercase;
+    white-space:nowrap
+  }
+  .tweetbox{
+    /* margin: 10rem; */
+    /* width: 40%; */
+    position: relative;
+  }
+  .sub{
+    float:right;
+    position: relative;
+  }
+  .button:hover {
+    background-image:none;
+    background-color:#2e86ab;
+    border: 2px solid #2e86ab;
+  }
+  .column.tw{
+    border-right: 2px solid #38686a;
+  }
+</style>
+
+
+<%= if TwitterWeb.Auth.signed_in?(@conn) do %>
+<body>
+  <div class = "row">
+    <div class = "column">
+      </div>
+      <div class = "column" id= "msglist">
+        <h1>Hi <%=  @username %>! What's on your mind?</h1>
+        <script>
+          var msglist = document.getElementById("msglist");
+          msglist.setAttribute("data-uname", "<%=  @username %>");
+          msglist.setAttribute("data-rname", "<%=  @username %>");
+          msglist.setAttribute("data-sname", "<%=  @subs %>");
+        </script>
+</div>
+  </div>
+  <div class = "row">
+    <div class = "column">
+      <div class="allthebuttons">
+        <div class="topad">
+          <a class="btn" href="<%= Routes.query_path(@conn, :index, user_name: @username, results: @results) %>">Search</a>
+        </div>
+
+        <div class="topad">
+          <a class="btn" href="<%= Routes.retweet_path(@conn, :index,user_name: @username) %>">Retweet</a>
+        </div>
+
+        <div class="topad">
+          <a class="btn" href="<%= Routes.add_path(@conn, :index, user_name: @username) %>">Add</a>
+        </div>
+
+        <div class="topad">
+          <%= form_for @conn, Routes.setting_path(@conn, :index, user_name: @username), fn f -> %>
+             <%= submit "Delete Account", class: "btn" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class = "column">
+      <div class="tweetbox" >
+        <%= form_for @conn, Routes.tweet_path(@conn, :tweet, user_name: @username ), [id: "new-retweet"], fn f -> %>
+          <%= text_input f, :tweet_text, [id: "message-content"]%>
+          <%= submit "Tweet", class: "btn sub"%>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="column tw">
+      <div class="tweets" id ="yourtweets">
+      <h3>Your Tweets</h3>
+        <%= for key <- get_keys(@username) do %>
+          <%= render("tweets.html", key: key) %>
+          <% end %>
+      </div>
+    </div>
+
+    <div class="column" >
+      <div class ="feed" id ="yourfeed">
+      <h3>Your Feed</h3>
+      <div class="qresults">
+        <%= if @feed != nil do %>
+          <%= for key <- @feed do %>
+            <%= render("tweets.html", key: key) %>
+          <% end %>
+          <%= else %>
+        <% end %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<% end %>

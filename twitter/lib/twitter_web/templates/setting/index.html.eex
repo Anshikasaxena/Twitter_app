@@ -1,0 +1,5 @@
+<h1>Settings</h1>
+
+<%= form_for @conn, Routes.setting_path(@conn, :delete), fn f -> %>
+   <%= submit "Delete Account", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,68 @@
+<style>
+  body {
+    /* background-color: #2e86ab; */
+  }
+  h1{
+    padding-top: 10rem;
+    text-align: center;
+  }
+
+  h2{
+    text-align: center;
+  }
+  .centerplease {
+    margin: 0 auto;
+    width: 50%;
+  }
+  .selections{
+    background-color: #cdc6ae;
+    padding: 5rem;
+    margin: 0 auto;
+    width: 40%;
+  }
+  .tfield{
+    background-color:#38686a;
+  }
+
+  .btn {
+    float:right;
+    font-size: 1.4rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0 2rem;
+    width: 40rem;
+    background-color:#2e86ab;
+    border: 2px solid #2e86ab;
+  }
+  .button-large {
+    font-size: 1.4rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding: 0 2rem;
+    width: 40rem;
+    background-color:#2e86ab;
+    border: 2px solid #2e86ab;
+  }
+  .button:hover {
+  background-image:none;
+  background-color:#38686a;
+  border: 2px solid #38686a;
+  }
+  p{
+    border: 2px solid #38686a;
+    padding: 1rem;
+  }
+</style>
+
+
+
+<div class="centerplease">
+<h1>Subscribe To Someone</h1>
+<%= form_for @conn, Routes.add_path(@conn, :addSub, user_name: @user_name), fn f -> %>
+  <%= text_input f, :tofollow ,placeholder: "Username"%>
+  <%= error_tag f, :tofollow %>
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>
+</div>
