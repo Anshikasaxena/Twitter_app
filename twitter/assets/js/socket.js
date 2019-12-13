@@ -90,14 +90,14 @@ if (retweetRoomId) {
     .receive("error", resp => { console.log("Unable to join", resp) })
 
   // Now that you are connected, you can join channels with a topic:
-
+   console.log("HERE IN RETWEET JS 1")
   document.querySelector("#new-retweet").addEventListener('submit', (e) => {
     e.preventDefault()
     let messagenumberInput = e.target.querySelector('#message-number')
     var msglist = document.getElementById("msglist");
     let messageSender = msglist.getAttribute("data-uname");
     
-
+    console.log("HERE IN RETWEET JS 2")
     channel.push('message:retweet', { message: messagenumberInput.value })
 
     messagenumberInput.value = ""
