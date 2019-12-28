@@ -10,7 +10,7 @@ Google Drive: https://drive.google.com/open?id=1HfO9w7o9Al8p4VtPUwwYp_yL1Spy1oG6
 
 
 ## How to run the website and simulation
-When the website is started a simulation of 100 users is created who start sending tweets to each other before the user logs in. This is so that the user has data to interact with when they first log on. To run the web interface navigate to the directory (/LaurenceauSaxena/twitter) and:
+When the website is started a simulation of 100 users is created who start sending tweets to each other before the user logs in. This is so that the user has data to interact with when they first log on. To run the web interface navigate to the directory (/../twitter) and:
 
 - Install dependencies with mix deps.get
 - Create and migrate your database with mix ecto.setup
